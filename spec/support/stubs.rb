@@ -82,5 +82,20 @@ RSpec.configure do |config|
     WebMock.
       stub_request(:post, /.*\.algolia(net\.com|\.net)\/1\/indexes\/[^\/]+\/query/).
       to_return(body: '{ "hits": [ { "objectID": 42 } ], "page": 1, "hitsPerPage": 1 }')
+    # validate feed
+    WebMock.
+      stub_request(:get, /.*\.examplefeed.com/).
+      to_return(body:
+      <<~RSS
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <rss version="2.0">
+          <channel>
+            <title>Example RSS Feed</title>
+            <link>https://www.example.com</link>
+            <description>An example empty RSS Feed</description>
+          </channel>
+        </rss>
+      RSS
+               )
   end
 end

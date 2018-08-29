@@ -30,6 +30,7 @@ class User < ApplicationRecord
   has_many    :chat_channels, through: :chat_channel_memberships
   has_many    :push_notification_subscriptions, dependent: :destroy
   has_many    :feedback_messages
+  has_one     :rss_feed, as: :syndicatable, dependent: :destroy
 
   mount_uploader :profile_image, ProfileImageUploader
 

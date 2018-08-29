@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180826174411) do
+ActiveRecord::Schema.define(version: 20180829063535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -524,6 +524,15 @@ ActiveRecord::Schema.define(version: 20180826174411) do
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
+  end
+
+  create_table "rss_feeds", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "syndicatable_id"
+    t.string "syndicatable_type"
+    t.datetime "updated_at", null: false
+    t.string "url"
+    t.index ["syndicatable_type", "syndicatable_id"], name: "index_rss_feeds_on_syndicatable_type_and_syndicatable_id"
   end
 
   create_table "search_keywords", force: :cascade do |t|
